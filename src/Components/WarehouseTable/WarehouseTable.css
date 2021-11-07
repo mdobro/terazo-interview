@@ -1,0 +1,5 @@
+.warehouseHeader th {
+  vertical-align: top;
+  border: 1px solid black;
+  text-align: center;
+}
