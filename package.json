@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
+  "homepage": "https://mdobro.github.io/terazo-interview/",
   "scripts": {
     "start": "webpack serve --mode=development --open",
+    "build": "webpack",
     "lint": "eslint --ext .jsx,.js src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +28,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.61.0",
