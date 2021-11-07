@@ -1,0 +1,13 @@
+.warehouseTableRow td {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.warehouseTableRow #actionsCell {
+  white-space: nowrap;
+}
+
+.warehouseTableRow #editButton {
+  margin-right: 2px;
+}
