@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<DocumentFragment>
+  Langosh-AdamsIn congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.Daniel Inc509 Delladonna PlazaKibaraTanzania
+  <button
+    class="editButton btn btn-success btn-sm"
+    type="button"
+  >
+    Edit
+  </button>
+  <button
+    class="btn btn-danger btn-sm"
+    type="button"
+  >
+    Delete
+  </button>
+</DocumentFragment>
+`;

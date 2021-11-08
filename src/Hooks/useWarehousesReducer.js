@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import { warehouseReducerActions } from "../constants";
 
 const reducer = (warehouses, action) => {
-  const { RESET, UPDATE_WAREHOUSE } = warehouseReducerActions;
+  const { RESET, UPDATE_WAREHOUSE, DELETE_WAREHOUSE } = warehouseReducerActions;
 
   switch (action.type) {
     case RESET:
@@ -15,6 +15,10 @@ const reducer = (warehouses, action) => {
         }
         return warehouse;
       });
+    case DELETE_WAREHOUSE:
+      return warehouses.filter(
+        (warehouse) => warehouse.warehouseId !== action.warehouseId
+      );
     default:
       throw new Error("no such action exists");
   }

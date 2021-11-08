@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<DocumentFragment>
+  <table
+    class="table table-bordered"
+  >
+    <thead
+      class="warehouseHeader"
+    >
+      <tr>
+        <th
+          rowspan="2"
+        >
+          Name
+        </th>
+        <th
+          rowspan="2"
+        >
+          Description
+        </th>
+        <th
+          colspan="7"
+        >
+          Address
+        </th>
+        <th
+          rowspan="2"
+        >
+          Actions
+        </th>
+      </tr>
+      <tr>
+        <th>
+          Building Name
+        </th>
+        <th>
+          Street Line 1
+        </th>
+        <th>
+          Street Line 2
+        </th>
+        <th>
+          City
+        </th>
+        <th>
+          State/Province
+        </th>
+        <th>
+          Postal Code
+        </th>
+        <th>
+          Country
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</DocumentFragment>
+`;

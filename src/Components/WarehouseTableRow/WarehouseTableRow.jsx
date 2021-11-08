@@ -3,19 +3,18 @@ import "./WarehouseTableRow.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
-import { warehouseReducerActions } from "../../constants";
 
-const WarehouseTableRow = ({ warehouse, dispatch }) => {
+const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedWarehouse, setEditedWarehouse] = useState(warehouse);
 
   const onSaveRow = () => {
-    dispatch({
-      type: warehouseReducerActions.UPDATE_WAREHOUSE,
-      warehouse: editedWarehouse,
-    });
-    // make a patch request to the backend
+    onRowChange(editedWarehouse);
     setIsEditing(false);
+  };
+
+  const onDeleteRow = () => {
+    onRowDelete(warehouse);
   };
 
   const onInputChange = (e, fieldName) => {
@@ -27,9 +26,10 @@ const WarehouseTableRow = ({ warehouse, dispatch }) => {
     if (isEditing) {
       return (
         <Input
+          data-testid="warehouseTableInput"
           type="textarea"
           className="tableInput"
-          value={data}
+          value={data ?? ""}
           onChange={(e) => onInputChange(e, fieldName)}
         />
       );
@@ -80,9 +80,9 @@ const WarehouseTableRow = ({ warehouse, dispatch }) => {
               className="editButton"
               onClick={() => setIsEditing(true)}
             >
-              {isEditing ? "Save" : "Edit"}
+              Edit
             </Button>
-            <Button color="danger" size="sm">
+            <Button color="danger" size="sm" onClick={onDeleteRow}>
               Delete
             </Button>
           </>
@@ -107,11 +107,13 @@ WarehouseTableRow.propTypes = {
       country: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  dispatch: PropTypes.func,
+  onRowChange: PropTypes.func,
+  onRowDelete: PropTypes.func,
 };
 
 WarehouseTableRow.defaultProps = {
-  dispatch: undefined,
+  onRowChange: undefined,
+  onRowDelete: undefined,
 };
 
 export default WarehouseTableRow;
