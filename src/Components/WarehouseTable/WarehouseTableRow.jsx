@@ -4,23 +4,28 @@ import { Button } from "reactstrap";
 
 import "./WarehouseTableRow.css";
 
-const WarehouseTableRow = ({
-  name,
-  description,
-  buildingName,
-  streetLine1,
-  streetLine2,
-  city,
-  stateProvince,
-  zipPostalCode,
-  country,
-}) => {
+const WarehouseTableRow = ({ warehouse, dispatch }) => {
+  const {
+    warehouseId,
+    warehouseName,
+    warehouseDescription,
+    warehouseAddress: {
+      buildingName,
+      streetLine1,
+      streetLine2,
+      city,
+      stateProvince,
+      zipPostalCode,
+      country,
+    },
+  } = warehouse;
+
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <tr className="warehouseTableRow">
-      <td>{name}</td>
-      <td>{description}</td>
+      <td>{warehouseName}</td>
+      <td>{warehouseDescription}</td>
       <td>{buildingName}</td>
       <td>{streetLine1}</td>
       <td>{streetLine2}</td>

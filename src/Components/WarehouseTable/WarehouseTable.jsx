@@ -1,14 +1,15 @@
+import "./WarehouseTable.css";
+
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Table } from "reactstrap";
-
-import "./WarehouseTable.css";
-
-import WarehouseTableRow from "./WarehouseTableRow";
+import useWarehousesReducer from "../../Hooks/useWarehousesReducer";
 import useWarehouses from "../../Hooks/useWarehouses";
+import WarehouseTableRow from "./WarehouseTableRow";
 
 const WarehouseTable = () => {
-  const { warehouses, loading } = useWarehouses();
+  const { warehouses, loading, error } = useWarehouses();
+  const [editedWarehouses, dispatch] = useWarehousesReducer(warehouses);
   console.log(warehouses);
 
   return (
@@ -32,33 +33,13 @@ const WarehouseTable = () => {
       </thead>
 
       <tbody>
-        {warehouses?.map(
-          ({
-            warehouseName,
-            warehouseDescription,
-            warehouseAddress: {
-              buildingName,
-              streetLine1,
-              streetLine2,
-              city,
-              stateProvince,
-              zipPostalCode,
-              country,
-            },
-          }) => (
-            <WarehouseTableRow
-              name={warehouseName}
-              description={warehouseDescription}
-              buildingName={buildingName}
-              streetLine1={streetLine1}
-              streetLine2={streetLine2}
-              city={city}
-              stateProvince={stateProvince}
-              zipPostalCode={zipPostalCode}
-              country={country}
-            />
-          )
-        )}
+        {editedWarehouses?.map((warehouse) => (
+          <WarehouseTableRow
+            key={warehouse.warehouseId}
+            dispatch={dispatch}
+            warehouse={warehouse}
+          />
+        ))}
       </tbody>
     </Table>
   );

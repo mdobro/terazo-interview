@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import warehousesMockData from "../mockData/warehouses.json";
 
 export default () => {
-  const [warehouses, setWarehouses] = useState();
+  const [warehouses, setWarehouses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
