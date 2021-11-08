@@ -1,16 +1,19 @@
 import "./WarehouseTable.css";
 
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Table } from "reactstrap";
 import useWarehousesReducer from "../../Hooks/useWarehousesReducer";
 import useWarehouses from "../../Hooks/useWarehouses";
 import WarehouseTableRow from "./WarehouseTableRow";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 const WarehouseTable = () => {
-  const { warehouses, loading, error } = useWarehouses();
+  const { warehouses, loading } = useWarehouses();
   const [editedWarehouses, dispatch] = useWarehousesReducer(warehouses);
-  console.log(editedWarehouses);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Table bordered>

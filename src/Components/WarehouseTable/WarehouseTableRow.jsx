@@ -1,6 +1,6 @@
 import "./WarehouseTableRow.css";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
 import { warehouseReducerActions } from "../../constants";
@@ -92,8 +92,26 @@ const WarehouseTableRow = ({ warehouse, dispatch }) => {
   );
 };
 
-WarehouseTableRow.propTypes = {};
+WarehouseTableRow.propTypes = {
+  warehouse: PropTypes.shape({
+    warehouseId: PropTypes.string,
+    warehouseName: PropTypes.string,
+    warehouseDescription: PropTypes.string,
+    warehouseAddress: PropTypes.shape({
+      buildingName: PropTypes.string,
+      streetLine1: PropTypes.string,
+      streetLine2: PropTypes.string,
+      city: PropTypes.string,
+      stateProvince: PropTypes.string,
+      zipPostalCode: PropTypes.string,
+      country: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func,
+};
 
-WarehouseTableRow.defaultProps = {};
+WarehouseTableRow.defaultProps = {
+  dispatch: undefined,
+};
 
 export default WarehouseTableRow;
