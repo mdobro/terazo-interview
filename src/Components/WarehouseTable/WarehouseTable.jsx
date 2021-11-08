@@ -4,26 +4,15 @@ import { Table } from "reactstrap";
 
 import "./WarehouseTable.css";
 
-import warehousesMockData from "../../mockData/warehouses.json";
 import WarehouseTableRow from "./WarehouseTableRow";
+import useWarehouses from "../../Hooks/useWarehouses";
 
 const WarehouseTable = () => {
-  const [warehouses, setWarehouses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // axios.get("http://localhost:3000/warehouses");
-    // mock async call
-    setTimeout(() => {
-      setWarehouses(warehousesMockData);
-      setIsLoading(false);
-    }, 500);
-  }, []);
-
+  const { warehouses, loading } = useWarehouses();
   console.log(warehouses);
 
   return (
-    <Table>
+    <Table bordered>
       <thead className="warehouseHeader">
         <tr>
           <th rowSpan={2}>Name</th>
@@ -43,7 +32,7 @@ const WarehouseTable = () => {
       </thead>
 
       <tbody>
-        {warehouses.map(
+        {warehouses?.map(
           ({
             warehouseName,
             warehouseDescription,
