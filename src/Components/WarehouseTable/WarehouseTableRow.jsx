@@ -1,12 +1,43 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Button } from "reactstrap";
-
 import "./WarehouseTableRow.css";
 
+import React, { useCallback, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import { Button, Input } from "reactstrap";
+import { warehouseReducerActions } from "../../constants";
+
 const WarehouseTableRow = ({ warehouse, dispatch }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedWarehouse, setEditedWarehouse] = useState(warehouse);
+
+  const onSaveRow = () => {
+    dispatch({
+      type: warehouseReducerActions.UPDATE_WAREHOUSE,
+      warehouse: editedWarehouse,
+    });
+    // make a patch request to the backend
+    setIsEditing(false);
+  };
+
+  const onInputChange = (e, fieldName) => {
+    const { value } = e.target;
+    setEditedWarehouse((prev) => ({ ...prev, [fieldName]: value }));
+  };
+
+  const getCellContents = (data, fieldName) => {
+    if (isEditing) {
+      return (
+        <Input
+          type="textarea"
+          className="tableInput"
+          value={data}
+          onChange={(e) => onInputChange(e, fieldName)}
+        />
+      );
+    }
+    return data;
+  };
+
   const {
-    warehouseId,
     warehouseName,
     warehouseDescription,
     warehouseAddress: {
@@ -18,28 +49,44 @@ const WarehouseTableRow = ({ warehouse, dispatch }) => {
       zipPostalCode,
       country,
     },
-  } = warehouse;
-
-  const [isEditing, setIsEditing] = useState(false);
+  } = editedWarehouse;
 
   return (
     <tr className="warehouseTableRow">
-      <td>{warehouseName}</td>
-      <td>{warehouseDescription}</td>
-      <td>{buildingName}</td>
-      <td>{streetLine1}</td>
-      <td>{streetLine2}</td>
-      <td>{city}</td>
-      <td>{stateProvince}</td>
-      <td>{zipPostalCode}</td>
-      <td>{country}</td>
-      <td id="actionsCell">
-        <Button color="success" size="sm" id="editButton">
-          Edit
-        </Button>
-        <Button color="danger" size="sm">
-          Delete
-        </Button>
+      <td>{getCellContents(warehouseName, "warehouseName")}</td>
+      <td>{getCellContents(warehouseDescription, "warehouseDescription")}</td>
+      <td>{getCellContents(buildingName, "buildingName")}</td>
+      <td>{getCellContents(streetLine1, "streetLine1")}</td>
+      <td>{getCellContents(streetLine2, "streetLine2")}</td>
+      <td>{getCellContents(city, "city")}</td>
+      <td>{getCellContents(stateProvince, "stateProvince")}</td>
+      <td>{getCellContents(zipPostalCode, "zipPostalCode")}</td>
+      <td>{getCellContents(country, "country")}</td>
+      <td className="actionsCell">
+        {isEditing ? (
+          <Button
+            color="success"
+            size="sm"
+            className="editButton"
+            onClick={onSaveRow}
+          >
+            Save
+          </Button>
+        ) : (
+          <>
+            <Button
+              color="success"
+              size="sm"
+              className="editButton"
+              onClick={() => setIsEditing(true)}
+            >
+              {isEditing ? "Save" : "Edit"}
+            </Button>
+            <Button color="danger" size="sm">
+              Delete
+            </Button>
+          </>
+        )}
       </td>
     </tr>
   );

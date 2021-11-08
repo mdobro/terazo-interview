@@ -10,7 +10,7 @@ import WarehouseTableRow from "./WarehouseTableRow";
 const WarehouseTable = () => {
   const { warehouses, loading, error } = useWarehouses();
   const [editedWarehouses, dispatch] = useWarehousesReducer(warehouses);
-  console.log(warehouses);
+  console.log(editedWarehouses);
 
   return (
     <Table bordered>

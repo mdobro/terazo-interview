@@ -2,4 +2,5 @@
 
 export const warehouseReducerActions = {
   RESET: "reset",
+  UPDATE_WAREHOUSE: "updateWarehouse",
 };

@@ -1,7 +1,11 @@
-.warehouseTableRow #actionsCell {
+.warehouseTableRow .actionsCell {
   white-space: nowrap;
 }
 
-.warehouseTableRow #editButton {
+.warehouseTableRow .editButton {
   margin-right: 2px;
+}
+
+.warehouseTableRow .tableInput {
+  width: 100%;
 }
