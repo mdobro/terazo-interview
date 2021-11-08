@@ -9,3 +9,7 @@
 .warehouseTableRow .tableInput {
   width: 100%;
 }
+
+.warehouseTableRow td {
+  white-space: pre-line;
+}
