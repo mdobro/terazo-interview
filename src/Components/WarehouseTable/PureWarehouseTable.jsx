@@ -1,42 +1,134 @@
 import "./PureWarehouseTable.css";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Table } from "reactstrap";
+import { Pagination, PaginationItem, PaginationLink, Table } from "reactstrap";
 import WarehouseTableRow from "../WarehouseTableRow/WarehouseTableRow";
 
-const PureWarehouseTable = ({ warehouses, onRowChange, onRowDelete }) => (
-  <Table bordered>
-    <thead className="warehouseHeader">
-      <tr>
-        <th rowSpan={2}>Name</th>
-        <th rowSpan={2}>Description</th>
-        <th colSpan={7}>Address</th>
-        <th rowSpan={2}>Actions</th>
-      </tr>
-      <tr>
-        <th>Building Name</th>
-        <th>Street Line 1</th>
-        <th>Street Line 2</th>
-        <th>City</th>
-        <th>State/Province</th>
-        <th>Postal Code</th>
-        <th>Country</th>
-      </tr>
-    </thead>
+const pageSize = 10;
 
-    <tbody>
-      {warehouses?.map((warehouse) => (
-        <WarehouseTableRow
-          key={warehouse.warehouseId}
-          warehouse={warehouse}
-          onRowChange={onRowChange}
-          onRowDelete={onRowDelete}
-        />
-      ))}
-    </tbody>
-  </Table>
-);
+const PureWarehouseTable = ({ warehouses, onRowChange, onRowDelete }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const pagesCount = Math.ceil(warehouses.length / pageSize);
+
+  useEffect(() => {
+    if (currentPage > pagesCount - 1) {
+      setCurrentPage(pagesCount - 1);
+    }
+  }, [currentPage, pagesCount]);
+
+  let pageLimit = 10;
+  let start = 0;
+  let end = pageLimit;
+
+  if (pagesCount <= pageLimit) {
+    pageLimit = pagesCount;
+  }
+
+  // increment start page when current page is greater than 5
+  if (currentPage - 5 >= 0) {
+    start = currentPage - 4;
+  }
+
+  // if reaching end of pagination stop increment
+  if (start + pageLimit >= pagesCount) {
+    start = pagesCount - pageLimit;
+  }
+
+  // increment end page when current + 5 exceeds page limit
+  if (currentPage + 5 >= pageLimit) {
+    end = currentPage + 6;
+    pageLimit = end;
+    if (pagesCount <= pageLimit) {
+      pageLimit = pagesCount;
+    }
+  }
+
+  return (
+    <div className="warehouseTableContainer">
+      <div className="warehouseTable">
+        <Table bordered>
+          <thead className="warehouseHeader">
+            <tr>
+              <th rowSpan={2}>Name</th>
+              <th rowSpan={2}>Description</th>
+              <th colSpan={7}>Address</th>
+              <th rowSpan={2}>Actions</th>
+            </tr>
+            <tr>
+              <th>Building Name</th>
+              <th>Street Line 1</th>
+              <th>Street Line 2</th>
+              <th>City</th>
+              <th>State/Province</th>
+              <th>Postal Code</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {warehouses
+              .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+              .map((warehouse) => (
+                <WarehouseTableRow
+                  key={warehouse.warehouseId}
+                  warehouse={warehouse}
+                  onRowChange={onRowChange}
+                  onRowDelete={onRowDelete}
+                />
+              ))}
+          </tbody>
+        </Table>
+      </div>
+      <div className="pagination">
+        <Pagination>
+          <PaginationItem disabled={currentPage === 0}>
+            <PaginationLink
+              first
+              onClick={() => setCurrentPage(0)}
+              disabled={currentPage === 0}
+            />
+          </PaginationItem>
+          <PaginationItem disabled={currentPage === 0}>
+            <PaginationLink
+              previous
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+              disabled={currentPage === 0}
+            />
+          </PaginationItem>
+          {[...Array(pagesCount)].map((page, index) => {
+            if (index >= start && index < end) {
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <PaginationItem active={currentPage === index} key={index}>
+                  <PaginationLink onClick={() => setCurrentPage(index)}>
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            }
+            return undefined;
+          })}
+          <PaginationItem disabled={currentPage === pagesCount - 1}>
+            <PaginationLink
+              next
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              disabled={currentPage === pagesCount - 1}
+            />
+          </PaginationItem>
+          <PaginationItem disabled={currentPage === pagesCount - 1}>
+            <PaginationLink
+              last
+              onClick={() => setCurrentPage(pagesCount - 1)}
+              disabled={currentPage === pagesCount - 1}
+            />
+          </PaginationItem>
+        </Pagination>
+      </div>
+    </div>
+  );
+};
 
 PureWarehouseTable.propTypes = {
   warehouses: PropTypes.arrayOf(

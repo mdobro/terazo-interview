@@ -1,4 +1,15 @@
+.warehouseTable {
+  overflow: auto;
+  height: calc(100vh - 130px);
+}
+
 .warehouseHeader th {
   vertical-align: top;
   text-align: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }

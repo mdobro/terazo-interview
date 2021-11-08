@@ -2,59 +2,158 @@
 
 exports[`renders 1`] = `
 <DocumentFragment>
-  <table
-    class="table table-bordered"
+  <div
+    class="warehouseTableContainer"
   >
-    <thead
-      class="warehouseHeader"
+    <div
+      class="warehouseTable"
     >
-      <tr>
-        <th
-          rowspan="2"
+      <table
+        class="table table-bordered"
+      >
+        <thead
+          class="warehouseHeader"
         >
-          Name
-        </th>
-        <th
-          rowspan="2"
+          <tr>
+            <th
+              rowspan="2"
+            >
+              Name
+            </th>
+            <th
+              rowspan="2"
+            >
+              Description
+            </th>
+            <th
+              colspan="7"
+            >
+              Address
+            </th>
+            <th
+              rowspan="2"
+            >
+              Actions
+            </th>
+          </tr>
+          <tr>
+            <th>
+              Building Name
+            </th>
+            <th>
+              Street Line 1
+            </th>
+            <th>
+              Street Line 2
+            </th>
+            <th>
+              City
+            </th>
+            <th>
+              State/Province
+            </th>
+            <th>
+              Postal Code
+            </th>
+            <th>
+              Country
+            </th>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+    </div>
+    <div
+      class="pagination"
+    >
+      <nav
+        aria-label="pagination"
+        class=""
+      >
+        <ul
+          class="pagination"
         >
-          Description
-        </th>
-        <th
-          colspan="7"
-        >
-          Address
-        </th>
-        <th
-          rowspan="2"
-        >
-          Actions
-        </th>
-      </tr>
-      <tr>
-        <th>
-          Building Name
-        </th>
-        <th>
-          Street Line 1
-        </th>
-        <th>
-          Street Line 2
-        </th>
-        <th>
-          City
-        </th>
-        <th>
-          State/Province
-        </th>
-        <th>
-          Postal Code
-        </th>
-        <th>
-          Country
-        </th>
-      </tr>
-    </thead>
-    <tbody />
-  </table>
+          <li
+            class="page-item"
+          >
+            <button
+              aria-label="First"
+              class="page-link"
+            >
+              <span
+                aria-hidden="true"
+              >
+                «
+              </span>
+              <span
+                class="visually-hidden"
+              >
+                First
+              </span>
+            </button>
+          </li>
+          <li
+            class="page-item"
+          >
+            <button
+              aria-label="Previous"
+              class="page-link"
+            >
+              <span
+                aria-hidden="true"
+              >
+                ‹
+              </span>
+              <span
+                class="visually-hidden"
+              >
+                Previous
+              </span>
+            </button>
+          </li>
+          <li
+            class="page-item disabled"
+          >
+            <button
+              aria-label="Next"
+              class="page-link"
+              disabled=""
+            >
+              <span
+                aria-hidden="true"
+              >
+                ›
+              </span>
+              <span
+                class="visually-hidden"
+              >
+                Next
+              </span>
+            </button>
+          </li>
+          <li
+            class="page-item disabled"
+          >
+            <button
+              aria-label="Last"
+              class="page-link"
+              disabled=""
+            >
+              <span
+                aria-hidden="true"
+              >
+                »
+              </span>
+              <span
+                class="visually-hidden"
+              >
+                Last
+              </span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </DocumentFragment>
 `;
