@@ -3,6 +3,7 @@ import "./WarehouseTableRow.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
+import { set } from "lodash";
 
 const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -19,7 +20,12 @@ const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
 
   const onInputChange = (e, fieldName) => {
     const { value } = e.target;
-    setEditedWarehouse((prev) => ({ ...prev, [fieldName]: value }));
+
+    setEditedWarehouse((prev) => {
+      const newObj = { ...prev };
+      set(newObj, fieldName, value);
+      return newObj;
+    });
   };
 
   const getCellContents = (data, fieldName) => {
@@ -55,13 +61,17 @@ const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
     <tr className="warehouseTableRow">
       <td>{getCellContents(warehouseName, "warehouseName")}</td>
       <td>{getCellContents(warehouseDescription, "warehouseDescription")}</td>
-      <td>{getCellContents(buildingName, "buildingName")}</td>
-      <td>{getCellContents(streetLine1, "streetLine1")}</td>
-      <td>{getCellContents(streetLine2, "streetLine2")}</td>
-      <td>{getCellContents(city, "city")}</td>
-      <td>{getCellContents(stateProvince, "stateProvince")}</td>
-      <td>{getCellContents(zipPostalCode, "zipPostalCode")}</td>
-      <td>{getCellContents(country, "country")}</td>
+      <td>{getCellContents(buildingName, "warehouseAddress.buildingName")}</td>
+      <td>{getCellContents(streetLine1, "warehouseAddress.streetLine1")}</td>
+      <td>{getCellContents(streetLine2, "warehouseAddress.streetLine2")}</td>
+      <td>{getCellContents(city, "warehouseAddress.city")}</td>
+      <td>
+        {getCellContents(stateProvince, "warehouseAddress.stateProvince")}
+      </td>
+      <td>
+        {getCellContents(zipPostalCode, "warehouseAddress.zipPostalCode")}
+      </td>
+      <td>{getCellContents(country, "warehouseAddress.country")}</td>
       <td className="actionsCell">
         {isEditing ? (
           <Button
