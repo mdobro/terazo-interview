@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Input } from "reactstrap";
 import { set } from "lodash";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -92,9 +93,7 @@ const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
             >
               Edit
             </Button>
-            <Button color="danger" size="sm" onClick={onDeleteRow}>
-              Delete
-            </Button>
+            <DeleteButton onDelete={onDeleteRow} />
           </>
         )}
       </td>

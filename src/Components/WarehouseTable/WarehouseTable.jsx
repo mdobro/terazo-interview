@@ -9,10 +9,6 @@ const WarehouseTable = () => {
   const { warehouses, loading } = useWarehouses();
   const [editedWarehouses, dispatch] = useWarehousesReducer(warehouses);
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
   const onRowChange = (warehouse) => {
     dispatch({
       type: warehouseReducerActions.UPDATE_WAREHOUSE,
@@ -27,14 +23,16 @@ const WarehouseTable = () => {
     });
   };
 
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
-    <>
-      <PureWarehouseTable
-        warehouses={editedWarehouses}
-        onRowChange={onRowChange}
-        onRowDelete={onRowDelete}
-      />
-    </>
+    <PureWarehouseTable
+      warehouses={editedWarehouses}
+      onRowChange={onRowChange}
+      onRowDelete={onRowDelete}
+    />
   );
 };
 

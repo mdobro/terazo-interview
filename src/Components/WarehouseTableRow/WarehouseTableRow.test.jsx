@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-globals */
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WarehouseTableRow from "./WarehouseTableRow";
 import mockData from "../../mockData/warehouses.json";
@@ -22,10 +23,14 @@ test("Edit", () => {
   const onRowChange = jest.fn();
 
   const { getByText, getAllByTestId } = render(
-    <WarehouseTableRow warehouse={mockWarehouse} onRowChange={onRowChange} />,
-    {
-      container: document.body.appendChild(tbody),
-    }
+    <table>
+      <tbody>
+        <WarehouseTableRow
+          warehouse={mockWarehouse}
+          onRowChange={onRowChange}
+        />
+      </tbody>
+    </table>
   );
   userEvent.click(getByText("Edit"));
   const inputs = getAllByTestId("warehouseTableInput");
@@ -35,15 +40,21 @@ test("Edit", () => {
   expect(onRowChange).toHaveBeenCalledWith(mockWarehouse);
 });
 
-test("Delete", () => {
+test("Delete", async () => {
   const onRowDelete = jest.fn();
 
-  const { getByText } = render(
-    <WarehouseTableRow warehouse={mockWarehouse} onRowDelete={onRowDelete} />,
-    {
-      container: document.body.appendChild(tbody),
-    }
+  const { getByTestId } = render(
+    <table>
+      <tbody>
+        <WarehouseTableRow
+          warehouse={mockWarehouse}
+          onRowDelete={onRowDelete}
+        />
+      </tbody>
+    </table>
   );
-  userEvent.click(getByText("Delete"));
+  userEvent.click(getByTestId("deleteButton"));
+
+  userEvent.click(getByTestId("deleteModalButton"));
   expect(onRowDelete).toHaveBeenCalledWith(mockWarehouse);
 });

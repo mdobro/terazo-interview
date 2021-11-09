@@ -13,6 +13,7 @@ In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.Daniel I
   </button>
   <button
     class="btn btn-danger btn-sm"
+    data-testid="deleteButton"
     type="button"
   >
     Delete

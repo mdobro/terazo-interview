@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<DocumentFragment>
+  <button
+    class="btn btn-danger btn-sm"
+    data-testid="deleteButton"
+    type="button"
+  >
+    Delete
+  </button>
+</DocumentFragment>
+`;
