@@ -21,9 +21,7 @@ test("Shows modal", () => {
 
 test("Calls onDelete", () => {
   const onDelete = jest.fn();
-  const { getByTestId, queryByTestId } = render(
-    <DeleteButton onDelete={onDelete} />
-  );
+  const { getByTestId } = render(<DeleteButton onDelete={onDelete} />);
   const deleteButton = getByTestId("deleteButton");
   userEvent.click(deleteButton);
   const modalDeleteButton = getByTestId("deleteModalButton");
