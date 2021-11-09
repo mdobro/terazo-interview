@@ -2,9 +2,13 @@
 
 exports[`renders 1`] = `
 <DocumentFragment>
-  <div
-    class="warehouseTableContainer"
-  >
+  <div>
+    <input
+      class="warehouseSearchInput form-control"
+      placeholder="Search"
+      type="text"
+      value=""
+    />
     <div
       class="warehouseTable"
     >
@@ -74,11 +78,12 @@ exports[`renders 1`] = `
           class="pagination"
         >
           <li
-            class="page-item"
+            class="page-item disabled"
           >
             <button
               aria-label="First"
               class="page-link"
+              disabled=""
             >
               <span
                 aria-hidden="true"
@@ -93,11 +98,12 @@ exports[`renders 1`] = `
             </button>
           </li>
           <li
-            class="page-item"
+            class="page-item disabled"
           >
             <button
               aria-label="Previous"
               class="page-link"
+              disabled=""
             >
               <span
                 aria-hidden="true"
@@ -112,12 +118,11 @@ exports[`renders 1`] = `
             </button>
           </li>
           <li
-            class="page-item disabled"
+            class="page-item"
           >
             <button
               aria-label="Next"
               class="page-link"
-              disabled=""
             >
               <span
                 aria-hidden="true"
@@ -132,12 +137,11 @@ exports[`renders 1`] = `
             </button>
           </li>
           <li
-            class="page-item disabled"
+            class="page-item"
           >
             <button
               aria-label="Last"
               class="page-link"
-              disabled=""
             >
               <span
                 aria-hidden="true"

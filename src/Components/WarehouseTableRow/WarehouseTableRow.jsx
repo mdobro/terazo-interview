@@ -58,7 +58,7 @@ const WarehouseTableRow = ({ warehouse, onRowChange, onRowDelete }) => {
   } = editedWarehouse;
 
   return (
-    <tr className="warehouseTableRow">
+    <tr className="warehouseTableRow" data-testid="warehouseTableRow">
       <td>{getCellContents(warehouseName, "warehouseName")}</td>
       <td>{getCellContents(warehouseDescription, "warehouseDescription")}</td>
       <td>{getCellContents(buildingName, "warehouseAddress.buildingName")}</td>

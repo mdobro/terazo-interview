@@ -13,3 +13,8 @@
   justify-content: center;
   margin-top: 10px;
 }
+
+.warehouseSearchInput {
+  width: 500px;
+  margin-bottom: 10px;
+}

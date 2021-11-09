@@ -9,6 +9,7 @@
     "build": "webpack",
     "lint": "eslint --ext .jsx,.js src",
     "test": "jest ",
+    "test-update": "jest -u",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

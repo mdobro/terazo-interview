@@ -2,21 +2,39 @@ import "./PureWarehouseTable.css";
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Pagination, PaginationItem, PaginationLink, Table } from "reactstrap";
+import {
+  Input,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Table,
+} from "reactstrap";
 import WarehouseTableRow from "../WarehouseTableRow/WarehouseTableRow";
+import useSearch from "../../Hooks/useSearch";
 
 const pageSize = 10;
 
 const PureWarehouseTable = ({ warehouses, onRowChange, onRowDelete }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchedWarehouses = useSearch(searchTerm, warehouses);
+
   const [currentPage, setCurrentPage] = useState(0);
 
-  const pagesCount = Math.ceil(warehouses.length / pageSize);
+  const pagesCount = Math.ceil(searchedWarehouses.length / pageSize);
 
   useEffect(() => {
-    if (currentPage > pagesCount - 1) {
+    if (pagesCount === 0) {
+      setCurrentPage(0);
+    } else if (currentPage > pagesCount - 1) {
       setCurrentPage(pagesCount - 1);
     }
   }, [currentPage, pagesCount]);
+
+  const onSearchChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+    setCurrentPage(0);
+  };
 
   let pageLimit = 10;
   let start = 0;
@@ -46,7 +64,13 @@ const PureWarehouseTable = ({ warehouses, onRowChange, onRowDelete }) => {
   }
 
   return (
-    <div className="warehouseTableContainer">
+    <div>
+      <Input
+        className="warehouseSearchInput"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={onSearchChange}
+      />
       <div className="warehouseTable">
         <Table bordered>
           <thead className="warehouseHeader">
@@ -68,7 +92,7 @@ const PureWarehouseTable = ({ warehouses, onRowChange, onRowDelete }) => {
           </thead>
 
           <tbody>
-            {warehouses
+            {searchedWarehouses
               .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
               .map((warehouse) => (
                 <WarehouseTableRow
