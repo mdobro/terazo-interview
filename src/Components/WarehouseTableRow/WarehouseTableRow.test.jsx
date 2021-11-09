@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WarehouseTableRow from "./WarehouseTableRow";
 import mockData from "../../mockData/warehouses.json";
